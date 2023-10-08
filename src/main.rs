@@ -5,11 +5,12 @@ use axum::{
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let port = std::env::var("PORT")?;
+    let port = std::env::var("PORT").unwrap_or("3000".to_string());
+    let addr1 = format!("0.0.0.0:{port}");
 
     let app = Router::new().route("/", get(index));
 
-    axum::Server::bind(&format!("0.0.0.0:{port}").parse()?)
+    axum::Server::bind(&addr1.parse()?)
         .serve(app.into_make_service())
         .await?;
 

@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  link_shortener:
+    build:
+      context: .
+    image: link_shortener
+    container_name: link_shortener
+    environment:
+      - PORT=3000
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
